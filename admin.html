@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Admin Nha khoa | Hệ thống quản trị tổng thể</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="logo-area">
+                <i class="fas fa-tooth"></i>
+                <span>DentalCare<br><small>Admin</small></span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li data-module="dashboard" class="active"><i class="fas fa-tachometer-alt"></i> <span>Tổng
+                            quan</span></li>
+                    <li>
+                        <a href="Status.html">Trạng thái xác nhận</a>
+                    </li>
+                    <li>
+                        <a href="customer-accounts.html ">Quản Lý Tài Khoản </a>
+                    </li>
+                    <li>
+                        <a href="./doctor-accounts.html ">Quản Lý Bác Sĩ </a>
+                    </li>
+                    <li>
+                        <a href="service-management.html">Quản lý dịch vụ nha khoa </a>
+                    </li>
+                    <li>
+                        <a href="appointment-management.html">Quản lý lịch khám</a>
+                    </li>
+                    <li>
+                        <a href="chatbot-management.html">Quản lý Chatbot</a>
+                    </li>
+                    <li>
+                        <a href="dental-images.html">Hình ảnh răng miệng</a>
+                    </li>
+                    <li>
+                        <a href="report-statistics.html">Thống kê báo cáo</a>
+                    </li>
+                    <li>
+                        <a href="./send-mail.html">Gửi Gmail bệnh nhân</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="admin-header">
+                <h1 id="pageTitle"><i class="fas fa-tachometer-alt"></i> Tổng Quan Tài Khoản</h1>
+                <div class="admin-actions" id="globalActions"></div>
+            </header>
+            <div id="moduleContainer" class="module-container"></div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

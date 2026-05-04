@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Thống kê báo cáo | Admin DentalCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="report-statistics.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-card">
+            <div class="title-section">
+                <i class="fas fa-chart-pie"></i>
+                <div>
+                    <h2>Thống kê báo cáo</h2>
+                    <p>Phân tích dữ liệu hoạt động phòng khám</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-exit" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Thoát</button>
+            </div>
+        </div>
+
+        <div class="filter-panel">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label><i class="fas fa-calendar-alt"></i> Khoảng thời gian</label>
+                    <select id="periodType">
+                    <option value="day">Theo ngày</option>
+                    <option value="month">Theo tháng</option>
+                    <option value="year">Theo năm</option>
+                </select>
+                </div>
+                <div class="filter-group" id="dateRangeGroup">
+                    <label><i class="fas fa-calendar-day"></i> Từ ngày</label>
+                    <input type="date" id="startDate">
+                    <label><i class="fas fa-calendar-day"></i> Đến ngày</label>
+                    <input type="date" id="endDate">
+                </div>
+                <div class="filter-group" id="monthGroup" style="display: none;">
+                    <label><i class="fas fa-calendar-month"></i> Tháng</label>
+                    <input type="month" id="monthPicker">
+                </div>
+                <div class="filter-group" id="yearGroup" style="display: none;">
+                    <label><i class="fas fa-calendar-year"></i> Năm</label>
+                    <input type="number" id="yearPicker" placeholder="2025">
+                </div>
+                <button class="btn-primary" id="applyFilterBtn"><i class="fas fa-filter"></i> Áp dụng</button>
+            </div>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label><i class="fas fa-user-md"></i> Lọc theo bác sĩ</label>
+                    <select id="filterDoctor">
+                    <option value="all">Tất cả bác sĩ</option>
+                </select>
+                </div>
+                <div class="filter-group">
+                    <label><i class="fas fa-teeth"></i> Lọc theo dịch vụ</label>
+                    <select id="filterService">
+                    <option value="all">Tất cả dịch vụ</option>
+                </select>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn-export" id="exportPdfBtn"><i class="fas fa-file-pdf"></i> Xuất PDF</button>
+                    <button class="btn-export" id="exportExcelBtn"><i class="fas fa-file-excel"></i> Xuất Excel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-cards">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-info">
+                    <h3 id="totalPatients">0</h3>
+                    <p>Số bệnh nhân</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-calendar-check"></i>
+                <div class="stat-info">
+                    <h3 id="totalAppointments">0</h3>
+                    <p>Số lịch khám</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-dollar-sign"></i>
+                <div class="stat-info">
+                    <h3 id="totalRevenue">0</h3>
+                    <p>Doanh thu (VNĐ)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+        </div>
+
+        <div class="table-wrapper">
+            <h3><i class="fas fa-table"></i> Chi tiết lịch khám trong kỳ</h3>
+            <div class="table-responsive">
+                <table class="data-table" id="detailTable">
+                    <thead>
+                        <tr>
+                            <th>Mã lịch</th>
+                            <th>Bệnh nhân</th>
+                            <th>Bác sĩ</th>
+                            <th>Dịch vụ</th>
+                            <th>Ngày khám</th>
+                            <th>Giờ khám</th>
+                            <th>Trạng thái</th>
+                            <th>Doanh thu (VNĐ)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailTableBody">
+                        <tr>
+                            <td colspan="8" class="empty-data">Chưa có dữ liệu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="report-statistics.js"></script>
+</body>
+
+</html>

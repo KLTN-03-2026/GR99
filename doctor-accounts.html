@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý tài khoản bác sĩ | DentalCare</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="doctor-accounts.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header-card">
+            <div class="title-section">
+                <i class="fas fa-user-md"></i>
+                <div>
+                    <h2>Quản lý tài khoản bác sĩ</h2>
+                    <p>Thêm, sửa, xóa và tìm kiếm thông tin bác sĩ</p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <div class="stats-badge">
+                    <i class="fas fa-stethoscope"></i>
+                    <span id="totalCount">0</span> bác sĩ
+                </div>
+                <button class="btn-exit" id="exitBtn">
+                    <i class="fas fa-sign-out-alt"></i> Thoát
+                </button>
+            </div>
+        </div>
+
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+            <button class="btn-primary" id="openAddModalBtn">
+                <i class="fas fa-plus-circle"></i> Thêm bác sĩ
+            </button>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Tìm theo tên, email, SĐT, chuyên khoa...">
+            </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-wrapper">
+            <table class="doctor-table">
+                <thead>
+                    <tr>
+                        <th>Ảnh</th>
+                        <th>ID</th>
+                        <th>Họ tên</th>
+                        <th>Chuyên khoa</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="doctorTableBody"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- MODAL -->
+    <div id="doctorModal" class="modal">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3 id="modalTitle">
+                    <i class="fas fa-user-md"></i> Thêm bác sĩ
+                </h3>
+                <button class="close-modal" id="closeModalBtn">&times;</button>
+            </div>
+
+            <form id="doctorForm">
+                <input type="hidden" id="editId">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Họ tên *</label>
+                        <input type="text" id="fullName" placeholder="BS. Nguyễn Văn A" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Chuyên khoa *</label>
+                        <input type="text" id="specialty" placeholder="Răng hàm mặt, Chỉnh nha..." required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Số điện thoại *</label>
+                        <input type="tel" id="phone" placeholder="0901234567" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="email" placeholder="doctor@gmail.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tên đăng nhập *</label>
+                        <input type="text" id="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mật khẩu *</label>
+                        <input type="password" id="password" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Trạng thái</label>
+                    <select id="status">
+                        <option value="active">Đang làm việc</option>
+                        <option value="inactive">Nghỉ việc</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Ảnh đại diện</label>
+                    <div class="image-upload-container">
+                        <input type="file" id="doctorImage" accept="image/*">
+                        <div id="imagePreview" class="image-preview"></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="cancelModalBtn">Hủy</button>
+                    <button type="submit">Lưu</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script src="doctor-accounts.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+// Test script to populate sample data for testing
+// Run this in browser console to add sample data
+
+// Sample services
+const sampleServices = [
+    { id: 1, name: "Khám tổng quát & Tư vấn", price: 200000, description: "Khám tổng quát răng miệng và tư vấn" },
+    { id: 2, name: "Lấy cao răng", price: 300000, description: "Loại bỏ mảng bám và cao răng" },
+    { id: 3, name: "Trám răng", price: 500000, description: "Trám răng bị sâu hoặc hỏng" },
+    { id: 4, name: "Nhổ răng", price: 400000, description: "Nhổ răng sữa hoặc răng bệnh" },
+    { id: 5, name: "Niềng răng", price: 50000000, description: "Dịch vụ chỉnh nha niềng răng" },
+    { id: 6, name: "Trồng răng Implant", price: 15000000, description: "Trồng răng implant cao cấp" },
+    { id: 7, name: "Tẩy trắng răng", price: 2000000, description: "Tẩy trắng răng chuyên nghiệp" },
+    { id: 8, name: "Điều trị tủy răng", price: 1000000, description: "Điều trị tủy răng bị viêm" },
+    { id: 9, name: "Phủ răng sứ", price: 3000000, description: "Phủ răng sứ thẩm mỹ" },
+    { id: 10, name: "Chỉnh nha thẩm mỹ", price: 10000000, description: "Chỉnh nha không mắc cài" }
+];
+
+// Sample doctors
+const sampleDoctors = [
+    { id: 1, fullName: "BS. Nguyễn Minh Hải", specialty: "Răng hàm mặt", phone: "0123456789", email: "hai@aura.com", image: "images/bs nam.jpg" },
+    { id: 2, fullName: "BS. Trần Thị Lan", specialty: "Chỉnh nha", phone: "0987654321", email: "lan@aura.com", image: "images/bs nu.jpg" },
+    { id: 3, fullName: "BS. Lê Văn Đức", specialty: "Nha khoa tổng quát", phone: "0912345678", email: "duc@aura.com", image: "images/bs nam.jpg" },
+    { id: 4, fullName: "BS. Phạm Thị Mai", specialty: "Nha khoa trẻ em", phone: "0987123456", email: "mai@aura.com", image: "images/bs nu.jpg" },
+    { id: 5, fullName: "BS. Hoàng Văn Tùng", specialty: "Phẫu thuật miệng", phone: "0934567890", email: "tung@aura.com", image: "images/bs nam.jpg" }
+];
+
+// Sample patients
+const samplePatients = [
+    { id: 1, fullName: "Nguyễn Văn A", phone: "0123456789", email: "a@example.com" },
+    { id: 2, fullName: "Trần Thị B", phone: "0987654321", email: "b@example.com" }
+];
+
+// Sample appointments for testing cancel functionality
+const now = new Date();
+const futureDate1 = new Date(now.getTime() + 8 * 60 * 60 * 1000); // 8 hours from now
+const futureDate2 = new Date(now.getTime() + 2 * 60 * 60 * 1000); // 2 hours from now (cannot cancel)
+const pastDate = new Date(now.getTime() - 24 * 60 * 60 * 1000); // Yesterday
+
+const sampleAppointments = [{
+        id: Date.now() + 1,
+        name: "Nguyễn Văn A",
+        email: "nguyenvana@gmail.com",
+        phone: "0123456789",
+        date: futureDate1.toISOString().slice(0, 10), // Future date
+        time: "Sáng (08:00 - 11:30)",
+        service: "Khám tổng quát & Tư vấn",
+        doctor: "BS. Nguyễn Minh Hải",
+        note: "Khám định kỳ",
+        status: "Đã xác nhận",
+        bookDate: now.toISOString().slice(0, 10)
+    },
+    {
+        id: Date.now() + 2,
+        name: "Nguyễn Văn A",
+        email: "nguyenvana@gmail.com",
+        phone: "0123456789",
+        date: futureDate2.toISOString().slice(0, 10), // Too close to cancel
+        time: "Chiều (13:30 - 17:30)",
+        service: "Lấy cao răng",
+        doctor: "BS. Lê Văn Đức",
+        note: "Lấy cao răng định kỳ",
+        status: "Chờ duyệt",
+        bookDate: now.toISOString().slice(0, 10)
+    },
+    {
+        id: Date.now() + 3,
+        name: "Nguyễn Văn A",
+        email: "nguyenvana@gmail.com",
+        phone: "0123456789",
+        date: pastDate.toISOString().slice(0, 10), // Past appointment
+        time: "Sáng (08:00 - 11:30)",
+        service: "Trám răng",
+        doctor: "BS. Trần Thị Lan",
+        note: "Trám răng số 5",
+        status: "Đã hoàn thành",
+        bookDate: pastDate.toISOString().slice(0, 10)
+    }
+];
+
+// Store in localStorage
+localStorage.setItem('dental_services', JSON.stringify(sampleServices));
+localStorage.setItem('dental_doctors', JSON.stringify(sampleDoctors));
+localStorage.setItem('clinic_patients', JSON.stringify(samplePatients));
+localStorage.setItem('dental_appointments', JSON.stringify(sampleAppointments));
+
+// Set current patient for testing
+localStorage.setItem('current_patient', JSON.stringify({ name: "Nguyễn Văn A", phone: "0123456789" }));
+
+console.log('Sample data populated for testing appointment display!');
+console.log('Patient Nguyễn Văn A has 3 appointments: 1 confirmed, 1 pending, 1 completed');
+console.log('Page should show appointment section automatically on load');

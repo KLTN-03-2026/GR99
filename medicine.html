@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Phòng khám - Kê đơn thuốc | Bác sĩ</title>
+    <link rel="stylesheet" href="medicine.css">
+</head>
+
+<body>
+    <div class="prescription-container">
+        <div class="patient-header">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>👨‍⚕️ Hồ sơ bệnh nhân</h2>
+                <button class="btn-exit" id="exitBtn">✖ Thoát</button>
+            </div>
+            <div class="patient-info">
+                <span><strong>Họ tên:</strong> <span id="patientName">Đang tải...</span></span>
+                <span><strong>Mã BN:</strong> <span id="patientId">Đang tải...</span></span>
+                <span><strong>Tuổi:</strong> <span id="patientAge">Đang tải...</span></span>
+                <span><strong>Giới tính:</strong> <span id="patientGender">Đang tải...</span></span>
+                <span><strong>Ngày khám:</strong> <span id="examDate">Đang tải...</span></span>
+                <span><strong>Chẩn đoán:</strong> <span id="diagnosis">Đang tải...</span></span>
+            </div>
+        </div>
+        <div class="prescription-body">
+            <div class="section-title">📋 Kê đơn thuốc</div>
+
+            <!-- Bảng thuốc động -->
+            <div class="drug-table-wrapper">
+                <table class="drug-table" id="drugTable">
+                    <thead>
+                        <tr>
+                            <th>Tên thuốc (Hoạt chất)</th>
+                            <th>Số lượng</th>
+                            <th>Liều dùng theo buổi <span style="font-weight:normal;">(S/T/C/Tối)</span></th>
+                            <th>Cách dùng</th>
+                            <th>Số ngày</th>
+                            <th style="width:50px"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="drugTableBody">
+                        <tr class="empty-row-msg">
+                            <td colspan="6">Chưa có thuốc nào. Vui lòng thêm thuốc từ danh mục bên dưới ➕</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Khu vực thêm thuốc: tìm kiếm + gợi ý -->
+            <div class="add-medicine-area">
+                <div style="font-weight:600; margin-bottom:12px;">➕ Thêm thuốc từ danh mục phòng khám</div>
+                <div class="search-box">
+                    <div class="search-input-group">
+                        <input type="text" id="drugSearchInput" placeholder="🔍 Nhập tên thuốc hoặc hoạt chất (VD: Paracetamol, Amoxicillin...)" autocomplete="off">
+                        <div id="suggestionsBox" class="suggestions-list" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="badge-info" style="margin-top:10px;">💡 Gợi ý theo tên thuốc / hoạt chất, chọn để thêm vào đơn</div>
+            </div>
+
+            <!-- Ghi chú & tái khám -->
+            <div class="notes-area">
+                <div class="notes-row">
+                    <div class="notes-field">
+                        <label>📝 Ghi chú & dặn dò đặc biệt</label>
+                        <textarea rows="3" id="specialNote" placeholder="Ví dụ: Uống nhiều nước, kiêng đồ tanh, tái khám nếu sốt cao..."></textarea>
+                    </div>
+                    <div class="appointment-field">
+                        <label>📅 Lịch hẹn tái khám</label>
+                        <input type="date" id="reExaminationDate">
+                        <div style="font-size:0.7rem; color:#5b6e8c; margin-top:5px;">(Tùy chọn, gợi ý cho bệnh nhân)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút hành động -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="savePrescriptionBtn">💾 Lưu đơn thuốc</button>
+                <button class="btn btn-secondary" id="exportPdfBtn">🖨️ Xuất PDF / In đơn</button>
+                <button class="btn btn-secondary" id="sendEmailBtn">✉️ Gửi email đơn thuốc</button>
+            </div>
+
+            <!-- Khu vực thông báo lỗi/thành công -->
+            <div id="messageArea"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="medicine.js" defer></script>
+</body>
+
+</html>

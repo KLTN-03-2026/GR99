@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Confirm</title>
+</head>
+
+<body>
+    <h1>Test Confirm Page</h1>
+    <button onclick="loadTestData()">Load Test Data</button>
+    <button onclick="openConfirm()">Open Confirm Page</button>
+
+    <script>
+        function loadTestData() {
+            // Load test data
+            const now = new Date();
+            const futureDate1 = new Date(now);
+            futureDate1.setDate(now.getDate() + 7);
+
+            const sampleAppointments = [{
+                id: 123,
+                name: "Nguyễn Văn A",
+                email: "nguyenvana@gmail.com",
+                phone: "0123456789",
+                date: futureDate1.toISOString().slice(0, 10),
+                time: "Sáng (08:00 - 11:30)",
+                service: "Khám tổng quát & Tư vấn",
+                doctor: "BS. Nguyễn Minh Hải",
+                note: "Khám định kỳ",
+                status: "Chờ duyệt",
+                bookDate: now.toISOString().slice(0, 10)
+            }];
+
+            localStorage.setItem("dental_appointments", JSON.stringify(sampleAppointments));
+            localStorage.setItem("confirmed_list", JSON.stringify([]));
+
+            alert("Test data loaded!");
+        }
+
+        function openConfirm() {
+            window.open("confirm.html?id=123", "_blank");
+        }
+    </script>
+</body>
+
+</html>

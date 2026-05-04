@@ -16,28 +16,70 @@
             <h1>Đặt lịch hẹn trực tuyến</h1>
             <p>Vui lòng điền thông tin, chúng tôi sẽ liên hệ sớm nhất.</p>
 
+            <!-- Chọn bệnh nhân -->
+            <div class="form-group">
+                <label>Chọn bệnh nhân <span style="color: #999; font-size: 0.85em;">(hoặc nhập thông tin
+                        mới)</span></label>
+                <select id="patientSelect">
+                    <option value="">-- Chọn bệnh nhân từ danh sách --</option>
+                </select>
+            </div>
+
             <!-- Họ tên + SĐT -->
+            <!-- Họ tên + Tuổi -->
             <div class="row">
                 <div class="form-group">
                     <label>Họ và tên</label>
                     <input type="text" id="name" placeholder="Nguyễn Văn A">
-                    <span class="error" id="errorName"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Tuổi</label>
+                    <input type="number" id="age" placeholder="20">
+                </div>
+            </div>
+
+            <!-- Giới tính + SĐT -->
+            <div class="row">
+                <div class="form-group">
+                    <label>Giới tính</label>
+                    <select id="gender">
+                        <option value="">-- Chọn giới tính --</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                        <option value="Khác">Khác</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label>Số điện thoại</label>
                     <input type="text" id="phone" placeholder="0901234567">
-                    <span class="error" id="errorPhone"></span>
                 </div>
             </div>
 
+            <!-- Địa chỉ -->
+            <div class="form-group">
+                <label>Địa chỉ</label>
+                <input type="text" id="address" placeholder="23 Ngô Quyền Đà Nẵng">
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="example@gmail.com">
+            </div>
 
             <div class="form-group">
                 <label>Dịch vụ quan tâm</label>
                 <select id="service">
-                    <option>Khám tổng quát & Tư vấn</option>
-                    <option>Niềng răng</option>
-                    <option>Trồng răng Implant</option>
+                    <option value="">-- Chọn dịch vụ --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Bác sĩ</label>
+                <select id="doctor">
+                    <option value="">-- Chọn bác sĩ --</option>
                 </select>
             </div>
 
@@ -52,8 +94,16 @@
                 <div class="form-group">
                     <label>Khung giờ</label>
                     <select id="time">
-                        <option>Sáng (08:00 - 11:30)</option>
-                        <option>Chiều (13:30 - 17:30)</option>
+                        <option value="08:00">08:00 - 09:00</option>
+                        <option value="09:00">09:00 - 10:00</option>
+                        <option value="10:00">10:00 - 11:00</option>
+                        <option value="11:00">11:00 - 12:00</option>
+                        <option value="12:00">12:00 - 13:00</option>
+                        <option value="13:00">13:00 - 14:00</option>
+                        <option value="14:00">14:00 - 15:00</option>
+                        <option value="15:00">15:00 - 16:00</option>
+                        <option value="16:00">16:00 - 17:00</option>
+                        <option value="17:00">17:00 - 18:00</option>
                     </select>
                 </div>
             </div>
@@ -71,17 +121,17 @@
                 </button>
 
                 <button class="btn-back" onclick="goHome()">
-                    ← Trang chủ
+                    ← Thoát
                 </button>
             </div>
         </div>
 
         <!-- RIGHT -->
-        <div class="right">
+        <div class="right" id="mapSection">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1918747.648581863!2d107.24333443218647!3d14.804720381694457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219c792252a13%3A0xfc14e3a044436487!2zxJDDoCBO4bq1bmcsIEjhuqNpIENow6J1LCDEkMOgIE7hurVuZywgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1775208539525!5m2!1svi!2s"
                 width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div class="info">
-                <p><strong>Địa chỉ</strong><br>Đường Ngô Quyền, Quận Hải Châu</p>
+                <p><strong>Địa chỉ</strong><br>45 Phạm Văn Bạch, Quận Hải Châu</p>
                 <p><strong>Hotline</strong><br>1900 8888</p>
                 <p><strong>Giờ làm việc</strong><br>08:00 - 20:00</p>
             </div>
@@ -92,6 +142,8 @@
                 <button>Facebook</button>
             </div>
         </div>
+
+
 
     </div>
 

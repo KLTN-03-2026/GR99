@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
-    <title>Lịch sử khám</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Lịch sử khám Nha khoa | MedTeeth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="./examinationhistory.css">
 </head>
+
 <body>
+    <div class="container">
+        <div class="header-card">
+            <div class="title-section">
+                <i class="fas fa-tooth"></i>
+                <div>
+                    <h2>Lịch Sử Khám Nha Khoa</h2>
+                    <p>Theo dõi các lần khám đã hoàn thành và lịch hẹn trước đây</p>
+                </div>
+            </div>
+            <div class="stats-badge">
+                <i class="fas fa-calendar-check"></i>
+                <span id="totalCount">0</span> lượt khám
+            </div>
+        </div>
 
-<div class="container">
-    <h2>Lịch Sử Lịch Khám</h2>
+        <div class="table-wrapper">
+            <table class="elegant-table">
+                <thead>
+                    <tr>
+                        <th>Họ tên</th>
+                        <th>SĐT</th>
+                        <th>Ngày khám</th>
+                        <th>Ngày đặt</th>
+                        <th>Ngày tái khám</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+                    <!-- Dữ liệu sẽ được JS tải (ban đầu trống) -->
+                </tbody>
+            </table>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Họ tên</th>
-                <th>SĐT</th>
-                <th>Ngày khám</th>
-                <th>Ngày đặt</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-            </tr>
-        </thead>
-        <tbody id="data"></tbody>
-    </table>
+        <div class="action-footer">
+            <button class="btn-back" id="backHomeBtn">
+            <i class="fas fa-arrow-left"></i> Thoát
+        </button>
+        </div>
+    </div>
 
-    <button class="btn-back" onclick="goHome()">Quay lại</button>
-</div>
-
-<script src="./examinationhistory.js"></script>
+    <script src="./examinationhistory.js"></script>
 </body>
+
 </html>

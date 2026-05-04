@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Email cho bệnh nhân</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./send-mail.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-envelope"></i> Gửi Email Xác Nhận</h1>
+                <p>Quản lý lịch khám và gửi thông báo đến bệnh nhân</p>
+            </div>
+            <button class="btn-back-admin" onclick="goBackAdmin()">
+                <i class="fas fa-arrow-left"></i> Thoát
+            </button>
+        </header>
+
+        <div class="content-wrapper">
+            <section class="appointments-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Danh Sách Bệnh Nhân Đã Đăng Ký</h2>
+                    <button type="button" class="btn-refresh" onclick="clearOldDataAndRefresh()" title="Xóa dữ liệu cũ và tải lại">
+                        <i class="fas fa-trash"></i> Xóa dữ liệu cũ
+                    </button>
+                </div>
+                <div id="appointmentsList">
+                    <!-- Bảng sẽ được render bởi JS -->
+                </div>
+            </section>
+
+            <section class="mail-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-paper-plane"></i> Gửi Email</h2>
+                </div>
+                <form class="mail-container" onsubmit="sendEmail(event)">
+                    <div class="form-group">
+                        <label for="name">
+                            <i class="fas fa-user"></i> Tên bệnh nhân
+                        </label>
+                        <input type="text" id="name" placeholder="Nhập tên bệnh nhân" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> Email bệnh nhân
+                        </label>
+                        <input type="email" id="email" placeholder="Nhập email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appointmentId">
+                            <i class="fas fa-hashtag"></i> Mã lịch khám
+                        </label>
+                        <input type="text" id="appointmentId" placeholder="Nhập mã lịch" required>
+                    </div>
+
+                    <button type="submit" class="btn-send">
+                        <i class="fas fa-check-circle"></i> Gửi Email
+                    </button>
+                </form>
+            </section>
+        </div>
+
+        <!-- EmailJS -->
+        <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+        <!-- JS riêng -->
+        <script src="send-mail.js"></script>
+
+</body>
+
+</html>

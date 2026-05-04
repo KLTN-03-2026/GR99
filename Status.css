@@ -1,0 +1,451 @@
+/* ===== STATUS PAGE STYLES ===== */
+
+.admin-wrapper {
+    display: block;
+    min-height: auto;
+}
+
+.main-content {
+    margin-left: 0;
+    padding: 2.25rem 2.5rem;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+.status-container {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.status-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 28px;
+    padding: 1.75rem;
+    box-shadow: 0 24px 60px rgba(15, 118, 110, 0.08);
+    border: 1px solid rgba(15, 118, 110, 0.08);
+}
+
+.status-card h2 {
+    font-size: 1.35rem;
+    color: #075a46;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.status-card h2 i {
+    color: #10b981;
+}
+
+
+/* ===== STATUS STATS ===== */
+
+.status-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.stat-item {
+    padding: 1.6rem 1.4rem;
+    border-radius: 18px;
+    text-align: center;
+    background: #f8fffc;
+    border: 1px solid rgba(15, 118, 110, 0.12);
+    transition: all 0.3s ease;
+    min-height: 150px;
+    display: grid;
+    place-items: center;
+}
+
+.stat-item:hover {
+    box-shadow: 0 14px 32px rgba(15, 118, 110, 0.12);
+    transform: translateY(-2px);
+}
+
+.stat-number {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #0f766e;
+    margin-bottom: 0.5rem;
+}
+
+.stat-number.confirmed {
+    color: #059669;
+}
+
+.stat-number.pending {
+    color: #d97706;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+
+/* ===== TABLE STYLES ===== */
+
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid rgba(15, 118, 110, 0.12);
+    box-shadow: inset 0 0 0 1px rgba(15, 118, 110, 0.04);
+}
+
+.status-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.75rem;
+    font-size: 0.95rem;
+}
+
+.status-table thead {
+    background: #0f766e;
+    color: white;
+    font-weight: 700;
+}
+
+.status-table thead th {
+    padding: 1rem 1rem;
+    text-align: left;
+    border-bottom: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-table tbody tr {
+    background: #fffbeb;
+    transition: all 0.2s ease;
+    border-radius: 18px;
+    box-shadow: 0 12px 24px rgba(15, 118, 110, 0.05);
+}
+
+.status-table tbody tr:hover {
+    background-color: #fbf7e6;
+}
+
+.status-table tbody tr.confirmed {
+    background-color: #effaf4;
+}
+
+.status-table tbody tr.pending {
+    background-color: #fffbeb;
+}
+
+.status-table td {
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    border: none;
+}
+
+.status-table td.code {
+    font-weight: 600;
+    color: #059669;
+}
+
+.status-table td.name {
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.status-table td.email {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.status-table td.time {
+    color: #6b7280;
+}
+
+.status-table td.status {
+    text-align: center;
+}
+
+.status-table td.sent-date,
+.status-table td.confirm-date {
+    font-size: 0.85rem;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+
+/* ===== STATUS BADGE ===== */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.status-badge.status-confirmed {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.status-confirmed:hover {
+    box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3);
+}
+
+.status-badge.status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-badge.status-pending:hover {
+    box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+}
+
+.status-badge i {
+    font-size: 0.75rem;
+}
+
+
+/* ===== ACTIONS ===== */
+
+.status-table td.actions {
+    text-align: center;
+}
+
+.btn-detail {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.btn-detail:hover {
+    background: #0369a1;
+    color: white;
+    transform: scale(1.05);
+}
+
+
+/* ===== FILTERS ===== */
+
+.admin-actions {
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    min-height: 56px;
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.admin-header h1 {
+    flex: 1 1 auto;
+    font-size: 2.1rem;
+    line-height: 1.1;
+}
+
+.btn-filter {
+    min-width: 135px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+#searchBox {
+    min-width: 280px;
+    max-width: 360px;
+    width: 100%;
+}
+
+.status-table thead th:first-child {
+    border-top-left-radius: 18px;
+}
+
+.status-table thead th:last-child {
+    border-top-right-radius: 18px;
+}
+
+.status-table tbody tr td:first-child {
+    border-bottom-left-radius: 18px;
+    border-top-left-radius: 18px;
+}
+
+.status-table tbody tr td:last-child {
+    border-bottom-right-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+@media (max-width: 1024px) {
+    .status-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .status-stats {
+        grid-template-columns: 1fr;
+    }
+    .admin-actions {
+        justify-content: flex-start;
+    }
+    .status-table thead th,
+    .status-table td {
+        padding: 0.85rem;
+    }
+    .btn-filter {
+        min-width: 110px;
+    }
+    #searchBox {
+        min-width: 160px;
+    }
+}
+
+.btn-filter {
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #134e4a;
+    transition: all 0.2s ease;
+}
+
+.btn-filter:hover {
+    background: #f3f4f6;
+    border-color: #059669;
+    color: #059669;
+}
+
+.btn-filter.active {
+    background: #059669;
+    color: white;
+    border-color: #059669;
+}
+
+#searchBox {
+    padding: 0.55rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    min-width: 250px;
+    width: auto;
+    transition: all 0.2s ease;
+}
+
+#searchBox:focus {
+    outline: none;
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+
+/* ===== EMPTY STATE ===== */
+
+.empty-state {
+    padding: 2rem;
+    text-align: center;
+    color: #9ca3af;
+}
+
+.empty-state i {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.loading {
+    padding: 2rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.loading i {
+    margin-right: 0.5rem;
+    color: #059669;
+}
+
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+    .status-stats {
+        grid-template-columns: 1fr;
+    }
+    .admin-actions {
+        flex-direction: column;
+    }
+    #searchBox {
+        min-width: 100%;
+    }
+    .status-table {
+        font-size: 0.8rem;
+    }
+    .status-table th,
+    .status-table td {
+        padding: 0.75rem 0.5rem;
+    }
+    .status-table td.sent-date,
+    .status-table td.confirm-date {
+        display: none;
+    }
+    .status-table thead th:nth-child(6),
+    .status-table thead th:nth-child(7) {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .status-container {
+        padding: 1rem;
+    }
+    .status-card {
+        padding: 1rem;
+    }
+    .status-table thead {
+        font-size: 0.75rem;
+    }
+    .status-table th,
+    .status-table td {
+        padding: 0.5rem;
+    }
+    .btn-detail {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Trạng thái xác nhận | Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="Status.css">
+</head>
+
+<body>
+    <div class="admin-wrapper">
+        <main class="main-content">
+            <header class="admin-header">
+                <h1><i class="fas fa-check-circle"></i> Trạng thái xác nhận lịch khám</h1>
+                <div class="admin-actions">
+                    <button class="btn-filter active" data-status="all" onclick="filterByStatus('all')">Tất cả</button>
+                    <button class="btn-filter" data-status="confirmed" onclick="filterByStatus('confirmed')">Đã xác nhận</button>
+                    <button class="btn-filter" data-status="pending" onclick="filterByStatus('pending')">Chưa xác nhận</button>
+                    <input type="text" id="searchBox" placeholder="Tìm kiếm tên hoặc email..." onkeyup="handleSearch()">
+                    <button id="logoutBtn" class="btn-primary">Quay lại Admin</button>
+                </div>
+            </header>
+
+            <div class="status-container">
+                <div class="status-card">
+                    <div class="status-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalCount">0</div>
+                            <div class="stat-label">Tổng lịch khám</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number confirmed" id="confirmedCount">0</div>
+                            <div class="stat-label">Đã xác nhận</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number pending" id="pendingCount">0</div>
+                            <div class="stat-label">Chưa xác nhận</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-card">
+                    <h2><i class="fas fa-list"></i> Danh sách xác nhận</h2>
+                    <div class="table-responsive">
+                        <table class="status-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã lịch</th>
+                                    <th>Tên bệnh nhân</th>
+                                    <th>Email</th>
+                                    <th>Giờ khám</th>
+                                    <th>Trạng thái</th>
+                                    <th>Gửi email</th>
+                                    <th>Xác nhận</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="statusTableBody">
+                                <tr>
+                                    <td colspan="8" class="text-center">
+                                        <div class="loading">
+                                            <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="Status.js"></script>
+</body>
+
+</html>

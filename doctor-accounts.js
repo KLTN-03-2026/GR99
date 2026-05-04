@@ -17,7 +17,8 @@ function loadData() {
             email: d.email || "",
             username: d.username || "",
             password: d.password || "",
-            status: d.status || "active"
+            status: d.status || "active",
+            image: d.image || "images/bs nam.jpg"
         }));
     } else {
         doctors = [{
@@ -28,7 +29,8 @@ function loadData() {
             email: "bs1@gmail.com",
             username: "bacsi1",
             password: "123456",
-            status: "active"
+            status: "active",
+            image: "images/bs nam.jpg"
         }];
         localStorage.setItem("dental_doctors", JSON.stringify(doctors));
     }
@@ -79,7 +81,7 @@ function renderTable() {
     const tbody = document.getElementById('doctorTableBody');
 
     if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7">Không tìm thấy bác sĩ</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8">Không tìm thấy bác sĩ</td></tr>`;
         return;
     }
 
@@ -87,9 +89,11 @@ function renderTable() {
 
     filtered.forEach(d => {
         const statusText = d.status === 'active' ? 'Đang làm việc' : 'Nghỉ việc';
+        const avatarHtml = d.image ? `<img src="${d.image}" alt="${escapeHtml(d.fullName)}" class="doctor-avatar-table">` : '<div class="doctor-avatar-placeholder">BS</div>';
 
         html += `
         <tr>
+            <td class="avatar-cell">${avatarHtml}</td>
             <td>${d.id}</td>
             <td>${escapeHtml(d.fullName)}</td>
             <td>${escapeHtml(d.specialty)}</td>
@@ -138,6 +142,16 @@ function editDoctor(id) {
     document.getElementById("password").value = d.password;
     document.getElementById("status").value = d.status;
 
+    // Load image preview if exists
+    const imagePreview = document.getElementById("imagePreview");
+    if (d.image) {
+        imagePreview.innerHTML = `<img src="${d.image}" alt="Preview"><button type="button" class="remove-image" onclick="removeImage()">✕</button>`;
+        document.getElementById("doctorImage").dataset.imageData = d.image;
+    } else {
+        imagePreview.innerHTML = '';
+        delete document.getElementById("doctorImage").dataset.imageData;
+    }
+
     document.getElementById("editId").value = d.id;
 
     openModal();
@@ -166,6 +180,13 @@ function toggleStatus(id) {
 // ==================== MODAL ====================
 function openModal() {
     document.getElementById("doctorModal").style.display = "flex";
+    // Clear image preview for new doctor form
+    const editId = document.getElementById("editId").value;
+    if (!editId) {
+        document.getElementById("imagePreview").innerHTML = '';
+        document.getElementById("doctorImage").value = '';
+        delete document.getElementById("doctorImage").dataset.imageData;
+    }
 }
 
 function closeModal() {
@@ -214,6 +235,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
         const status = document.getElementById("status").value;
+        const imageData = document.getElementById("doctorImage").dataset.imageData || '';
 
         if (!fullName || !specialty || !phone || !email || !username || !password) {
             alert("Nhập đầy đủ!");
@@ -238,12 +260,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 email,
                 username,
                 password,
-                status
+                status,
+                image: imageData || doctors[index].image
             };
             alert("Cập nhật thành công!");
         } else {
             // ADD
-            addDoctor({ fullName, specialty, phone, email, username, password, status });
+            addDoctor({ fullName, specialty, phone, email, username, password, status, image: imageData });
             alert("Thêm bác sĩ thành công!");
         }
 
@@ -252,9 +275,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
         this.reset();
         document.getElementById("editId").value = "";
+        document.getElementById("imagePreview").innerHTML = '';
+        delete document.getElementById("doctorImage").dataset.imageData;
         closeModal();
     });
 
-    // SEARCH
+    // Image preview
+    document.getElementById("doctorImage").addEventListener("change", function(e) {
+        const file = e.target.files[0];
+        const preview = document.getElementById("imagePreview");
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                preview.innerHTML = `<img src="${event.target.result}" alt="Preview"><button type="button" class="remove-image" onclick="removeImage()">✕</button>`;
+                // Store base64 in hidden field or variable
+                document.getElementById("doctorImage").dataset.imageData = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.innerHTML = '';
+            delete document.getElementById("doctorImage").dataset.imageData;
+        }
+    });
+
+    window.removeImage = function() {
+        document.getElementById("doctorImage").value = '';
+        document.getElementById("imagePreview").innerHTML = '';
+        delete document.getElementById("doctorImage").dataset.imageData;
+    };
+
+    // Form submission
     document.getElementById("searchInput").addEventListener("input", renderTable);
 });

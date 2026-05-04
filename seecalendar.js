@@ -1,51 +1,180 @@
-function loadData() {
-    let list = JSON.parse(localStorage.getItem("appointments")) || [];
-    let table = document.getElementById("tableData");
+let appointments = [];
+let currentPatient = null;
 
-    table.innerHTML = "";
+// ===== LOAD CURRENT USER =====
+function loadCurrentPatient() {
+    const currentUser = JSON.parse(localStorage.getItem('current_user'));
+    if (!currentUser || currentUser.role !== 'patient') return null;
 
-    // Nếu không có dữ liệu
-    if (list.length === 0) {
-        table.innerHTML = `
+    return {
+        name: currentUser.fullName,
+        phone: currentUser.phone
+    };
+}
+
+// ===== LOAD APPOINTMENTS =====
+function loadAppointmentsFromStorage() {
+    const stored = localStorage.getItem('appointments');
+
+    if (!stored) {
+        appointments = [];
+        return;
+    }
+
+    try {
+        const list = JSON.parse(stored);
+
+        currentPatient = loadCurrentPatient();
+
+        if (currentPatient && currentPatient.name && currentPatient.phone) {
+            appointments = list.filter(app =>
+                app.name === currentPatient.name &&
+                app.phone === currentPatient.phone &&
+                app.status !== 'Hủy' && app.status !== 'Đã hủy'
+            );
+        } else {
+            appointments = list.filter(app =>
+                app.status !== 'Hủy' && app.status !== 'Đã hủy'
+            );
+        }
+
+        // 🔥 XÓA "CHỜ DUYỆT" → CHUYỂN THÀNH "ĐÃ XÁC NHẬN"
+        appointments = appointments.map(app => {
+            if (app.status === "Chờ duyệt") {
+                app.status = "Đã xác nhận";
+            }
+            return app;
+        });
+
+    } catch {
+        appointments = [];
+    }
+
+    console.log("Current Patient:", currentPatient);
+    console.log("Appointments:", appointments);
+}
+
+// ===== FORMAT DATE =====
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const parts = dateStr.split('-');
+    if (parts.length !== 3) return dateStr;
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
+
+// ===== STATUS =====
+function getStatusClass(status) {
+    switch (status) {
+        case "Đã xác nhận":
+            return "status-confirmed";
+        case "Đã hoàn thành":
+            return "status-completed";
+        case "Hủy":
+            return "status-cancelled";
+        default:
+            return "";
+    }
+}
+
+function getStatusIcon(status) {
+    if (status === "Đã xác nhận") return '<i class="fas fa-check-circle"></i>';
+    if (status === "Đã hoàn thành") return '<i class="fas fa-clinic-medical"></i>';
+    if (status === "Hủy") return '<i class="fas fa-ban"></i>';
+    return '<i class="fas fa-question-circle"></i>';
+}
+
+// ===== RENDER =====
+function renderTable() {
+    const tbody = document.getElementById('tableData');
+
+    if (!tbody) return;
+
+    if (appointments.length === 0) {
+        tbody.innerHTML = `
             <tr>
-                <td colspan="5">Chưa có lịch khám nào</td>
+                <td colspan="5" style="text-align:center;">
+                    Không có lịch khám
+                </td>
             </tr>
         `;
         return;
     }
 
-    // Hiển thị dữ liệu
-    list.forEach((item, index) => {
-        let row = `
+    let html = '';
+
+    appointments.forEach(app => {
+
+        let cleanNote = app.note || "";
+        if (cleanNote === "Đã xác nhận") {
+            cleanNote = "";
+        }
+
+        html += `
             <tr>
-                <td>${item.name || ""}</td>
-                <td>${item.phone || ""}</td>
-                <td>${item.date || ""}</td>
-                <td>${item.note || ""}</td>
+                <td>${app.doctor}</td>
+                <td>${formatDate(app.date)} ${app.time}</td>
+                <td>${app.service}</td>
+                <td>${cleanNote}</td>
+
                 <td>
-                    <button onclick="deleteItem(${index})">Xóa</button>
+                    <button 
+                        onclick="cancelAppointment(${app.id})"
+                        style="
+                            background:#e74c3c;
+                            color:white;
+                            border:none;
+                            padding:5px 10px;
+                            border-radius:6px;
+                            cursor:pointer;
+                        "
+                    >
+                        Hủy
+                    </button>
                 </td>
             </tr>
         `;
-        table.innerHTML += row;
     });
+
+    tbody.innerHTML = html;
 }
 
-// Xóa có xác nhận
-function deleteItem(index) {
+// ===== CANCEL =====
+function cancelAppointment(id) {
+    const confirmCancel = confirm("Bạn có chắc chắn muốn hủy lịch này không?");
+    if (!confirmCancel) return;
+
     let list = JSON.parse(localStorage.getItem("appointments")) || [];
 
-    if (confirm("Bạn có chắc muốn xóa lịch này không?")) {
-        list.splice(index, 1);
-        localStorage.setItem("appointments", JSON.stringify(list));
-        loadData();
+    list = list.map(app => {
+        if (app.id == id) {
+            if (app.status === "Hủy") return app;
+            app.status = "Hủy";
+        }
+        return app;
+    });
+
+    localStorage.setItem("appointments", JSON.stringify(list));
+
+    loadAppointmentsFromStorage();
+    renderTable();
+
+    alert("Đã hủy lịch thành công!");
+}
+
+// ===== INIT =====
+document.addEventListener("DOMContentLoaded", function() {
+    loadAppointmentsFromStorage();
+    renderTable();
+});
+
+// ===== HOME BUTTON =====
+document.addEventListener("DOMContentLoaded", function() {
+    const homeBtn = document.getElementById("homeBtn");
+
+    if (homeBtn) {
+        homeBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            window.location.href = "home.html";
+        });
     }
-}
-
-// Quay về trang chủ (đúng file của bạn)
-function goHome() {
-    window.location.href = "home.html";
-}
-
-// Load khi mở trang
-window.onload = loadData;
+});

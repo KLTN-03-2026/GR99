@@ -3,35 +3,57 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Xem Lịch Khám</title>
-    <link rel="stylesheet" href="./seecalendar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Lịch khám Nha khoa | MedTeeth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="seecalendar.css">
 </head>
 
 <body>
 
     <div class="container">
-
-        <h1>Danh Sách Lịch Khám</h1>
-        <p>Quản lý và theo dõi các lịch đã đặt</p>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Họ tên</th>
-                    <th>SĐT</th>
-                    <th>Ngày khám</th>
-                    <th>Ghi chú</th>
-                    <th>Thao tác</th>
-                </tr>
-            </thead>
-
-            <tbody id="tableData"></tbody>
-        </table>
-
-        <div class="actions">
-            <button class="btn-home" onclick="goHome()">← Trang chủ</button>
+        <div class="header-section">
+            <div class="title-box">
+                <h1><i class="fas fa-tooth"></i> Lịch khám Nha khoa</h1>
+                <p><i class="fas fa-user-circle"></i> Xin chào, Bệnh nhân · Theo dõi lịch hẹn đã đăng ký</p>
+            </div>
+            <div class="stats-badge">
+                <i class="fas fa-calendar-week"></i>
+                <span id="totalAppointmentsCount">0</span> lịch hẹn
+            </div>
         </div>
 
+        <div class="toolbar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Tìm theo bác sĩ hoặc dịch vụ...">
+            </div>
+            <div class="info-note">
+                <i class="fas fa-info-circle"></i> Bạn chỉ có thể xem lịch đã đăng ký
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="appointment-table">
+                <thead>
+                    <tr>
+                        <th>Bác sĩ</th>
+                        <th>Ngày khám</th>
+                        <th>Dịch vụ</th>
+                        <th>Ghi chú</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="tableData">
+                    <!-- Dữ liệu sẽ được hiển thị từ JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions">
+            <button class="btn-home" id="homeBtn"><i class="fas fa-arrow-left"></i> Trang chủ</button>
+        </div>
     </div>
 
     <script src="seecalendar.js"></script>

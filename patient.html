@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Quản lý bệnh nhân | Hệ thống y tế</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="patient.css">
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <!-- Header với tông xanh ngọc chủ đạo -->
+        <header class="main-header">
+            <div class="logo-area">
+                <i class="fas fa-hospital-user"></i>
+                <h1>Quản lý bệnh nhân</h1>
+            </div>
+            <div class="header-actions">
+                <div class="header-badge">
+                    <i class="fas fa-leaf"></i> Chăm sóc sức khỏe toàn diện
+                </div>
+                <button id="logoutBtn" class="logout-button">
+                    <i class="fas fa-sign-out-alt"></i> Thoát
+                </button>
+            </div>
+        </header>
+
+        <div class="dashboard-container">
+            <!-- Bảng điều khiển bên trái: Form thêm / sửa -->
+            <div class="form-card">
+                <div class="card-header">
+                    <i class="fas fa-user-plus"></i>
+                    <h2 id="form-title">Thêm bệnh nhân mới</h2>
+                </div>
+                <form id="patientForm" class="patient-form">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label><i class="fas fa-user"></i> Họ và tên <span class="required">*</span></label>
+                            <input type="text" id="fullName" placeholder="Nguyễn Văn A" autocomplete="off">
+                            <small class="error-msg" id="nameError"></small>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-calendar-alt"></i> Tuổi</label>
+                            <input type="number" id="age" placeholder="Tuổi" min="0" max="120">
+                            <small class="error-msg" id="ageError"></small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label><i class="fas fa-venus-mars"></i> Giới tính</label>
+                            <select id="gender">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-phone-alt"></i> Số điện thoại</label>
+                            <input type="tel" id="phone" placeholder="0901234567">
+                            <small class="error-msg" id="phoneError"></small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label><i class="fas fa-user-md"></i> Bác sĩ</label>
+                            <select id="doctor">
+                                <option value="">Chọn bác sĩ</option>
+                                <option value="BS. Nguyễn Văn B">BS. Nguyễn Văn B</option>
+                                <option value="BS. Trần Thị C">BS. Trần Thị C</option>
+                                <option value="BS. Lê Văn D">BS. Lê Văn D</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-clock"></i> Giờ khám</label>
+                            <input type="time" id="appointmentTime">
+                        </div>
+                    </div>
+                    <div class="input-group full-width">
+                        <label><i class="fas fa-map-marker-alt"></i> Địa chỉ</label>
+                        <input type="text" id="address" placeholder="Số nhà, đường, phường/xã, tỉnh/thành">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="submitBtn" class="btn btn-primary"><i class="fas fa-save"></i>
+                            <span>Thêm bệnh nhân</span></button>
+                        <button type="button" id="cancelBtn" class="btn btn-secondary"><i
+                                class="fas fa-times-circle"></i> Hủy</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Khu vực danh sách bệnh nhân bên phải -->
+            <div class="list-card">
+                <div class="card-header list-header">
+                    <div class="header-title">
+                        <i class="fas fa-users"></i>
+                        <h2>Danh sách bệnh nhân</h2>
+                        <span class="patient-count" id="patientCount">0</span>
+                    </div>
+                    <div class="search-wrapper">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Tìm theo tên bệnh nhân...">
+                            <button id="searchBtn" class="search-btn"><i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <button id="resetSearchBtn" class="reset-search" title="Làm mới danh sách"><i
+                                class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="patient-table" id="patientTable">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Họ tên</th>
+                                <th>Tuổi</th>
+                                <th>Giới tính</th>
+                                <th>SĐT</th>
+                                <th>Bác sĩ</th>
+                                <th>Giờ khám</th>
+                                <th>Trạng thái</th>
+                                <th>Địa chỉ</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr class="empty-row">
+                                <td colspan="10">Chưa có dữ liệu bệnh nhân</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast thông báo -->
+    <div id="toastMsg" class="toast-message"></div>
+
+    <script src="patient.js"></script>
+</body>
+
+</html>

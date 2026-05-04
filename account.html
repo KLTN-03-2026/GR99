@@ -10,27 +10,34 @@
 
 <body>
 
-    <div class="container">
+    <!-- HEADER -->
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#f5f5f5;">
+        <div>
+            Xin chào, <strong id="headerName">User</strong>
+        </div>
+        <button onclick="logout()" style="padding:6px 12px;">Đăng xuất</button>
+    </div>
 
-        <!-- MAIN CONTENT -->
+    <div class="container">
 
         <div class="main">
 
             <!-- PROFILE -->
-
             <div id="profile" class="tab active">
 
                 <div class="profile-card">
 
-                    <img id="profileImage" src="images/bs nu.jpg" alt="Avatar người dùng">
+                    <img id="profileImage" src="images/bs nu.jpg" alt="Avatar">
 
                     <h2 id="profileName">Người dùng</h2>
 
                     <p id="profileRole">Bệnh nhân</p>
 
+                    <!-- EDIT -->
                     <div class="edit-section">
                         <input type="text" id="nameInput" placeholder="Nhập tên mới">
                         <input type="file" id="photoInput" accept="image/*">
+
                         <button onclick="editName()">Sửa tên</button>
                         <button onclick="uploadPhoto()">Thêm ảnh</button>
                     </div>
@@ -43,59 +50,69 @@
 
                     <div class="grid">
 
+                        <!-- EMAIL -->
                         <div>
                             <label>Email</label>
                             <p id="profileEmail">user@example.com</p>
                             <input type="email" id="emailInput" placeholder="Nhập email mới">
-                            <button onclick="editEmail()">Cập nhật</button>
                         </div>
 
+                        <!-- PHONE -->
                         <div>
                             <label>Số điện thoại</label>
-                            <p id="phone">0912345678</p>
+                            <p id="profilePhone">0912345678</p>
                             <input type="text" id="phoneInput" placeholder="Nhập số điện thoại mới">
-                            <button onclick="editPhone()">Cập nhật</button>
                         </div>
 
+                        <!-- ADDRESS -->
                         <div>
                             <label>Địa chỉ</label>
-                            <p id="address">Hà Nội</p>
+                            <p id="profileAddress">Hà Nội</p>
                             <input type="text" id="addressInput" placeholder="Nhập địa chỉ mới">
-                            <button onclick="editAddress()">Cập nhật</button>
                         </div>
 
+                        <!-- ID -->
                         <div>
                             <label>Mã bệnh nhân</label>
                             <p id="patientId">BN1023</p>
-
-                            <!-- ĐỔI MẬT KHẨU -->
-
-                            <div class="password-section">
-
-                                <h3>Đổi mật khẩu</h3>
-
-                                <input type="password" placeholder="Mật khẩu hiện tại">
-
-                                <input type="password" placeholder="Mật khẩu mới">
-
-                                <input type="password" placeholder="Xác nhận mật khẩu">
-
-                                <button>Đổi mật khẩu</button>
-
-                                <a href="home.html">
-                                    <button class="home-btn">← Trang chủ</button>
-                                </a>
-
-                            </div>
-
                         </div>
+
+                    </div>
+
+                    <!-- 🔥 NÚT UPDATE CHÍNH -->
+                    <div style="margin-top:20px;">
+                        <button onclick="updateAllProfile()" style="padding:10px 20px; background:#007bff; color:white; border:none;">
+                            💾 Cập nhật toàn bộ
+                        </button>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="password-section">
+
+                        <h3>Đổi mật khẩu</h3>
+
+                        <input type="password" id="currentPassword" placeholder="Mật khẩu hiện tại">
+                        <input type="password" id="newPassword" placeholder="Mật khẩu mới">
+                        <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu">
+
+                        <button onclick="changePassword()">Đổi mật khẩu</button>
+
+                        <!-- HOME -->
+                        <button class="home-btn" onclick="window.location.href='home.html'">
+                            ← Trang chủ
+                        </button>
 
                     </div>
 
                 </div>
 
-                <script src="account.js"></script>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="account.js"></script>
 
 </body>
-
 </html>

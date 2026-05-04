@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Quản lý lịch khám | Admin DentalCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="appointment-management.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-card">
+            <div class="title-section">
+                <i class="fas fa-calendar-check"></i>
+                <div>
+                    <h2>Quản lý lịch khám</h2>
+                    <p id="pageSubtitle">Hiển thị lịch khám trong tháng</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="stats-badge">
+                    <i class="fas fa-calendar-week"></i>
+                    <span id="totalCount">0</span> lịch hẹn
+                </div>
+                <button class="btn-exit" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Thoát </button>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <button class="btn-primary" id="openAddModalBtn"><i class="fas fa-plus-circle"></i> Thêm lịch khám</button>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Tìm theo tên bệnh nhân, bác sĩ...">
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="appointment-table">
+                <thead>
+                    <tr>
+                        <th>Mã lịch</th>
+                        <th>Tên bệnh nhân</th>
+                        <th>Bác sĩ phụ trách</th>
+                        <th>Ngày khám</th>
+                        <th>Giờ khám</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="appointmentTableBody">
+                    <!-- Dữ liệu sẽ được render bằng JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal thêm / sửa lịch khám -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"><i class="fas fa-calendar-plus"></i> Thêm lịch khám</h3>
+                <button class="close-modal" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="appointmentForm">
+                <input type="hidden" id="editId" value="">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Bệnh nhân *</label>
+                        <select id="patientId" required>
+                        <option value="">-- Chọn bệnh nhân --</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user-md"></i> Bác sĩ *</label>
+                        <select id="doctorId" required>
+                        <option value="">-- Chọn bác sĩ --</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-day"></i> Ngày khám *</label>
+                        <input type="date" id="appointmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-clock"></i> Giờ khám *</label>
+                        <select id="appointmentTime" required>
+                        <option value="">-- Chọn giờ --</option>
+                        <option value="08:00">08:00</option>
+                        <option value="08:30">08:30</option>
+                        <option value="09:00">09:00</option>
+                        <option value="09:30">09:30</option>
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option>
+                        <option value="11:00">11:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option>
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option>
+                        <option value="16:00">16:00</option>
+                        <option value="16:30">16:30</option>
+                        <option value="17:00">17:00</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Trạng thái</label>
+                    <select id="status">
+                    <option value="pending">Chờ duyệt</option>
+                    <option value="confirmed">Đã xác nhận</option>
+                    <option value="completed">Đã hoàn thành</option>
+                    <option value="cancelled">Đã hủy</option>
+                </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-pen-alt"></i> Ghi chú</label>
+                    <textarea id="note" rows="2" placeholder="Nhập ghi chú thêm..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" id="cancelModalBtn">Hủy bỏ</button>
+                    <button type="submit" class="btn-save"><i class="fas fa-save"></i> Lưu lại</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal xem chi tiết -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-info-circle"></i> Chi tiết lịch khám</h3>
+                <button class="close-modal" id="closeDetailModalBtn">&times;</button>
+            </div>
+            <div id="detailContent" style="padding: 0.5rem 0;"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" id="closeDetailBtn">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="appointment-management.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Bác sĩ - AURA SMILE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fas fa-tooth"></i></div>
+                <div class="logo-text">AURA<span>SMILE</span></div>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-item active" data-tab="dashboard-tab">
+                    <i class="fas fa-home"></i>
+                    <span>Tổng quan</span>
+                </div>
+                <a href="patient.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Quản Lý Bệnh Nhân</span>
+                </a>
+                <a href="patientrecords.html" class="nav-item">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Hồ Sơ Khám</span>
+                </a>
+                <a href="medicine.html" class="nav-item">
+                    <i class="fas fa-prescription-bottle-medical"></i>
+                    <span>Kê đơn</span>
+                </a>
+                <a href="./.html" class="nav-item">
+                    <i class="fas fa-comments-medical"></i>
+                    <span>Tư vấn</span>
+                </a>
+            </nav>
+
+            <div class="support-footer">
+                <i class="fas fa-headset"></i> Hỗ trợ 24/7
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-header">
+                <div class="greeting">
+                    <h1>Chào bác sĩ, <span id="doctorName">...</span> 👋</h1>
+                    <p id="currentDate"></p>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <div class="doctor-profile">
+                        <div class="avatar" id="doctorAvatar">BS</div>
+                        <div>
+                            <strong id="docFullName">Bác sĩ</strong><br>
+                            <span id="docSpecialty">Nha khoa</span>
+                        </div>
+                    </div>
+                    <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Thoát</button>
+                </div>
+            </div>
+
+            <!-- Tab Tổng quan -->
+            <div id="dashboard-tab" class="tab-pane active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title"><i class="far fa-calendar-check"></i> Lịch hẹn hôm nay</div>
+                        <div class="stat-number" id="todayAppointments">0</div>
+                        <div class="stat-sub" id="todayRemaining">còn 0 ca</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title"><i class="fas fa-user-friends"></i> Bệnh nhân tháng này</div>
+                        <div class="stat-number" id="monthlyPatients">0</div>
+                        <div class="stat-sub">+8% so với tháng trước</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title"><i class="fas fa-chart-simple"></i> Doanh thu hôm nay</div>
+                        <div class="stat-number" id="todayRevenue">0</div>
+                        <div class="stat-sub">VNĐ</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title"><i class="fas fa-star"></i> Đánh giá</div>
+                        <div class="stat-number">4.95 ★</div>
+                        <div class="stat-sub">42 đánh giá</div>
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="card">
+                        <div class="card-header"><span> Lịch điều trị hôm nay</span></div>
+                        <div id="appointmentList">Đang tải...</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><span> Bệnh nhân đang điều trị</span></div>
+                        <div id="treatmentPatients"></div>
+                    </div>
+                </div>
+            </div>
+            <script src="dashboard.js"></script>
+</body>
+
+</html>

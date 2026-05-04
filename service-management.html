@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Quản lý dịch vụ nha khoa | Admin DentalCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="service-management.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-card">
+            <div class="title-section">
+                <i class="fas fa-teeth"></i>
+                <div>
+                    <h2>Quản lý dịch vụ nha khoa</h2>
+                    <p>Thêm, sửa, xóa các dịch vụ điều trị</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="stats-badge">
+                    <i class="fas fa-list"></i>
+                    <span id="totalCount">0</span> dịch vụ
+                </div>
+                <button class="btn-exit" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Thoát </button>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <button class="btn-primary" id="openAddModalBtn"><i class="fas fa-plus-circle"></i> Thêm dịch vụ</button>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Tìm theo tên dịch vụ...">
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="service-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên dịch vụ</th>
+                        <th>Mô tả</th>
+                        <th>Chi phí (VNĐ)</th>
+                        <th>Thời gian thực hiện</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="serviceTableBody">
+                    <!-- Dữ liệu sẽ được render bằng JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal thêm / sửa dịch vụ -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"><i class="fas fa-plus-circle"></i> Thêm dịch vụ</h3>
+                <button class="close-modal" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="serviceForm">
+                <input type="hidden" id="editId" value="">
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Tên dịch vụ *</label>
+                    <input type="text" id="serviceName" placeholder="VD: Cạo vôi răng" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-align-left"></i> Mô tả</label>
+                    <textarea id="description" rows="3" placeholder="Mô tả chi tiết về dịch vụ..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-dollar-sign"></i> Chi phí (VNĐ) *</label>
+                        <input type="number" id="price" placeholder="200000" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-hourglass-half"></i> Thời gian thực hiện *</label>
+                        <select id="duration" required>
+                        <option value="">-- Chọn thời gian --</option>
+                        <option value="15 phút">15 phút</option>
+                        <option value="30 phút">30 phút</option>
+                        <option value="45 phút">45 phút</option>
+                        <option value="60 phút">60 phút</option>
+                        <option value="90 phút">90 phút</option>
+                        <option value="120 phút">120 phút</option>
+                        <option value="3 năm">3 năm</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" id="cancelModalBtn">Hủy bỏ</button>
+                    <button type="submit" class="btn-save"><i class="fas fa-save"></i> Lưu lại</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="service-management.js"></script>
+</body>
+
+</html>

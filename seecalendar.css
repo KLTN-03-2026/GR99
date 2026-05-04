@@ -1,88 +1,310 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #f3f7f5;
+    * {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(145deg, #e6f7f5 0%, #d1f0ed 100%);
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+    color: #115e59;
 }
 
 .container {
-    max-width: 1000px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    background: linear-gradient(to right, #20B2AA);
-    color: white;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-p {
-    text-align: center;
-    color: #666;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 25px;
-    border-radius: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(2px);
+    border-radius: 2rem;
+    box-shadow: 0 25px 45px -12px rgba(13, 148, 136, 0.25), 0 4px 12px rgba(0, 0, 0, 0.05);
     overflow: hidden;
 }
 
-th {
-    background: linear-gradient(to right, #20B2AA);
+.header-section {
+    background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+    padding: 1.8rem 2rem;
     color: white;
-    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
-td {
-    padding: 12px;
-    text-align: center;
-    border-top: 1px solid #ddd;
+.title-box h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-tr:hover {
-    background: #f1f5f9;
+.title-box h1 i {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
+.title-box p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 6px;
+}
 
-/* BUTTON XÓA */
+.stats-badge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    padding: 0.6rem 1.2rem;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-td button {
-    padding: 6px 12px;
+.toolbar {
+    padding: 1rem 2rem;
+    background: #f0fdfa;
+    border-bottom: 1px solid #ccebe6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 48px;
+    padding: 0.3rem 0.3rem 0.3rem 1rem;
+    border: 1px solid #a7f3d0;
+    transition: all 0.2s;
+}
+
+.search-box:focus-within {
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+}
+
+.search-box i {
+    color: #5b6e8c;
+}
+
+.search-box input {
     border: none;
-    border-radius: 8px;
-    background: #ef4444;
-    color: white;
-    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    width: 260px;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    background: transparent;
 }
 
-td button:hover {
-    background: #dc2626;
+.info-note {
+    font-size: 0.8rem;
+    background: #ccfbf1;
+    padding: 0.4rem 1rem;
+    border-radius: 40px;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
+.table-wrapper {
+    overflow-x: auto;
+    padding: 0 1rem 1.5rem 1rem;
+}
 
-/* HOME BUTTON */
+.appointment-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: 0.5rem;
+}
+
+.appointment-table thead th {
+    background: #f0fdfa;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #115e59;
+    border-bottom: 2px solid #99f6e4;
+    text-align: left;
+}
+
+.appointment-table tbody tr {
+    background: white;
+    border-radius: 20px;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.appointment-table tbody tr:hover {
+    transform: scale(1.003);
+    box-shadow: 0 12px 20px -12px rgba(13, 148, 136, 0.3);
+    background: #fefefe;
+}
+
+.appointment-table td {
+    padding: 1rem;
+    border-top: 1px solid #ccfbf1;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    width: fit-content;
+}
+
+.status-confirmed {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.status-pending {
+    background: #fff3e3;
+    color: #b45309;
+}
+
+.status-completed {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.status-cancelled {
+    background: #ffe4e2;
+    color: #b91c1c;
+}
 
 .actions {
+    padding: 1.2rem 2rem 2rem;
     text-align: center;
+    border-top: 1px solid #ccfbf1;
 }
 
 .btn-home {
-    margin-top: 20px;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 10px;
-    background: #e5e7eb;
+    background: #f0fdfa;
+    border: 1px solid #99f6e4;
+    padding: 0.7rem 2rem;
+    border-radius: 40px;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #0f766e;
+    transition: all 0.2s;
 }
 
 .btn-home:hover {
-    background: #d1d5db;
+    background: #ccfbf1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
+
+.empty-row td {
+    text-align: center;
+    padding: 2.5rem;
+    font-style: italic;
+    color: #5b6e8c;
+    background: #f9fffe;
+}
+
+.empty-row i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #14b8a6;
+}
+
+
+/* ===== ACTION BUTTONS ===== */
+
+.action-cell {
+    text-align: center;
+}
+
+.btn-cancel {
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    background: #fecaca;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+}
+
+.cancel-disabled {
+    color: #9ca3af;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-style: italic;
+}
+
+.cancel-disabled i {
+    opacity: 0.6;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 1rem;
+    }
+    .appointment-table td,
+    .appointment-table th {
+        padding: 0.8rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    .title-box h1 {
+        font-size: 1.4rem;
+    }
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-box input {
+        body {
+            padding: 1rem;
+        }
+        .appointment-table td,
+        .appointment-table th {
+            padding: 0.8rem 0.6rem;
+            font-size: 0.8rem;
+        }
+        .title-box h1 {
+            font-size: 1.4rem;
+        }
+        .toolbar {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .search-box input {
+            width: 100%;
+        }
+    }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác nhận lịch khám</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./confirm.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-calendar-check"></i> Xác nhận lịch khám</h1>
+        </header>
+
+        <div class="confirmation-card">
+            <h2><i class="fas fa-check-circle"></i> Xác nhận lịch</h2>
+            <div id="info"></div>
+            <button id="confirmBtn" class="btn-confirm" onclick="confirmAppointment()">
+                <i class="fas fa-check"></i> Xác nhận lịch
+            </button>
+        </div>
+
+        <!-- JS riêng -->
+        <script src="confirm.js"></script>
+</body>
+
+</html>
